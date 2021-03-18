@@ -14,18 +14,33 @@ var admins = [
 ];
 function logPerson(person) {
     // TODO: dodać wypisywanie na konsoli danych osoby: "imię nazwisko, wiek, rola"
-    console.log('Imie: ' + person.name + 'Nazwisko: ' + person.surname + 'Wiek: ' + person.age + 'Rola: ' + person.role);
+    console.log('Imie: ' + person.name + ' Nazwisko: ' + person.surname + ' Wiek: ' + person.age + ' Rola: ' + person.role);
 }
 function filterPersons(persons, criteria) {
     // TODO: zaimplementować funkcję, która przefiltruje tablicę persons za pomocą predykatu criteria
-    return persons.filter(criteria);
+    var filteredPersons = persons.filter(function (x) {
+        var meetsCriteria = true;
+        for (var key in criteria) {
+            if (x[key] != criteria[key]) {
+                meetsCriteria = false;
+            }
+        }
+        return meetsCriteria;
+    });
+    return filteredPersons;
 }
 console.log('Zadanie 1');
 users.forEach(logPerson);
 admins.forEach(logPerson);
 console.log('Zadanie 2');
-var newArray = __spreadArray(__spreadArray([], users), admins);
-newArray.forEach(logPerson);
+var persons = __spreadArray(__spreadArray([], users), admins);
+persons.forEach(logPerson);
+console.log('Zadanie 3');
+var arrayByAge = persons.filter(function (person) { return person.age > 25; });
+arrayByAge.forEach(logPerson);
+console.log('Zadanie 4');
+var filtered = filterPersons(persons, { name: 'Adam' });
+filtered.forEach(logPerson);
 // TODO:
 // 1. Przy pomocy funkcji logPerson wypisać osoby z tablicy users i admins (patrz foreach)
 // 2. Złączyć tablice users i admins i wypisać zawartość złączonej tablicy na konsoli (patrz operator spread)

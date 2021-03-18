@@ -19,24 +19,38 @@ interface Person {
     
     function logPerson(person: Person) {
     // TODO: dodać wypisywanie na konsoli danych osoby: "imię nazwisko, wiek, rola"
-        console.log('Imie: ' + person.name + 'Nazwisko: ' + person.surname + 'Wiek: ' + person.age + 'Rola: ' + person.role);
+        console.log('Imie: ' + person.name + ' Nazwisko: ' + person.surname + ' Wiek: ' + person.age + ' Rola: ' + person.role);
         
     }
     
     function filterPersons(persons: Person[], criteria: any): Person[] {
     // TODO: zaimplementować funkcję, która przefiltruje tablicę persons za pomocą predykatu criteria
-        return persons.filter(criteria);
+        const filteredPersons = persons.filter(x => {
+            let meetsCriteria: boolean = true;
+            for(const key in criteria){
+                if(x[key] != criteria[key]){
+                    meetsCriteria = false;
+                }
+            }
+            return meetsCriteria;
+        })
+        return filteredPersons;
     }
     console.log('Zadanie 1');
     users.forEach(logPerson);
     admins.forEach(logPerson);
 
     console.log('Zadanie 2');
-    const newArray = [...users, ...admins];
-    newArray.forEach(logPerson);
+    const persons: Person[] = [...users, ...admins];
+    persons.forEach(logPerson);
 
     console.log('Zadanie 3');
+    const arrayByAge: Person[] = persons.filter(person => person.age > 25);
+    arrayByAge.forEach(logPerson);
 
+    console.log('Zadanie 4');
+    const filtered = filterPersons(persons, {name: 'Adam'});
+    filtered.forEach(logPerson);
 
     
     // TODO:
