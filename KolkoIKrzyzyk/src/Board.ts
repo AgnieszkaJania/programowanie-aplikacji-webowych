@@ -70,6 +70,16 @@ class Board{
         return IsFull;
 
     }
+    // CheckValues(fieldsArray: Field[], fieldType: MoveType): boolean{
+    //     let iswon = true;
+    //     fieldsArray.forEach(element => {
+    //         if(element.State() != fieldType){
+    //             iswon = false;
+    //         }
+    //     })
+    //     return iswon;
+
+    // }
     CheckWin(field:Field){
         let FieldType = field.State();
         let isWon = true;
