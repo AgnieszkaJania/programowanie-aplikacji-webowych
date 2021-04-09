@@ -61,7 +61,9 @@ class Board{
                 console.log(this.move)
             }
 
-            this.CheckWin(clickedField);
+            if(this.CheckWin(clickedField)){
+                alert(`${clickedField.State() == 1 ? 'Cross' : 'Circle'} won !`);
+            }
             
         }
         
@@ -86,7 +88,7 @@ class Board{
     //     return iswon;
 
     // }
-    CheckWin(field:Field){
+    CheckWin(field:Field):boolean{
         let FieldType = field.State();
         let isWon = true;
         let FieldsByRow = this.fields.filter(el => el.row == field.row);
@@ -131,10 +133,11 @@ class Board{
             alert('Remis !');
         }
        
-        if(isWon){
+        // if(isWon){
             
-            alert(`${FieldType == 1 ? 'Cross' : 'Circle'} won !`);
-        }
+        //     
+        // }
+        return isWon;
 
     }
 

@@ -12,11 +12,23 @@ class App {
     }
 
     initMenu(): void {
-        const menuContainer = <HTMLDivElement>(document.createElement('div')); // kontener menu dostępnych gier
+        const menuContainer = <HTMLDivElement>(document.createElement('div'));
+        menuContainer.classList.add('menuContainer'); // kontener menu dostępnych gier // lista pozycji w menu dostępnych gier
         const gameContainer = <HTMLDivElement>(document.createElement('div')); // kontener główny ekranu z grą
-        const list = <HTMLDivElement>document.createElement('div'); // lista pozycji w menu dostępnych gier
-        //const TicTac
-       
+        gameContainer.classList.add('gameContainer');
+        const intro = <HTMLDivElement>(document.createElement('div'));
+        intro.classList.add('intro');
+        intro.classList.add('introBeforeLoad');
+        const mainHeader = <HTMLDivElement>document.createElement('div');
+        const secondHeader = <HTMLDivElement>document.createElement('div');
+        mainHeader.innerText = "Witaj !";
+        secondHeader.innerText = "Wybierz swoją grę";
+        intro.appendChild(mainHeader);
+        intro.appendChild(secondHeader);
+        document.body.appendChild(intro);
+        window.addEventListener('load', ()=>{
+            intro.classList.add('introOnLoad');
+        })
         
         
         // TODO: Zaimplementuj wzorzec fabryki/metody fabrykującej, tak aby na podstawie konkretnej wartości z enum
@@ -31,16 +43,16 @@ class App {
             console.log(Number(gameKind));
             const game = this.gamesFactory.getGame(Number(gameKind));
             const item = document.createElement('div');
+            item.classList.add('item');
             item.appendChild(document.createTextNode(game.name));
             item.addEventListener('click', ()=>{
                 gameContainer.innerHTML="";
                 gameContainer.appendChild(game.getGameElement());
 
             })
-            list.appendChild(item);
+            menuContainer.appendChild(item);
         }
         
-        menuContainer.appendChild(list);
         document.body.appendChild(menuContainer);
         document.body.appendChild(gameContainer);
     }

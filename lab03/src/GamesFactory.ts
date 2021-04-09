@@ -9,11 +9,9 @@ class GamesFactory{
             case Games.TicTacToe:
                 console.log('TicTacToe')
                 return new TicTacToe();
-                break;
             case Games.BattleShips:
                 console.log('Battle');
                 return new BattleShips();
-                break;
             default:
                 throw new Error('Invalid game');
 
