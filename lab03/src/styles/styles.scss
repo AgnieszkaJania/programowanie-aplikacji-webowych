@@ -1,4 +1,4 @@
-@import './sweets.scss';
+@import './gloomySunday.scss';
 body {
   color: $font-color;
   background-color: $bg-color;
@@ -51,4 +51,10 @@ body {
 .item:hover{
   background-color: $hoverColor;
   transition: 0.5s ease-in-out;
+}
+.pink{
+  background-color: $fieldOne;
+}
+.aqua{
+  background-color: $fieldTwo;
 }

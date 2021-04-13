@@ -13,10 +13,10 @@ class Field{
         this.element.id = `FIELD${row}_${column}`;
 
         if((row + column) % 2 == 0){
-            this.element.style.backgroundColor = 'pink';
+            this.element.classList.add('pink');
 
         }else{
-            this.element.style.backgroundColor = 'aqua';
+            this.element.classList.add('aqua');
         }
         
     }
@@ -38,11 +38,15 @@ class Field{
     MakeMove(type: MoveType){
         switch(type){
             case MoveType.circle:
+                this.element.innerText = "";
                 this.element.innerText = "O";
                 break;
             case MoveType.cross:
+                this.element.innerText = "";
                 this.element.innerText = "X";
                 break;
+            case MoveType.empty:
+                this.element.innerText = "";
             
         }
     }
