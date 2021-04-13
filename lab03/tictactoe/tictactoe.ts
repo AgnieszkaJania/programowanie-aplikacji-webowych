@@ -10,6 +10,9 @@ export class TicTacToe implements Game {
     infoWinLength: HTMLElement;
     inputWinLength:HTMLElement;
     gameContainer: HTMLDivElement;
+    playingWithComputer: HTMLElement;
+    label: HTMLElement;
+    form: HTMLElement;
 
     constructor() {
         this.name = "Kółko i krzyżyk";
@@ -31,7 +34,17 @@ export class TicTacToe implements Game {
         this.inputWinLength = document.createElement('input');
         this.inputWinLength.setAttribute('type','text');
         this.inputWinLength.id = 'WinLength';
+        this.form = document.createElement('form');
+        this.playingWithComputer = document.createElement('input');
+        this.playingWithComputer.setAttribute('type', 'radio');
+        this.playingWithComputer.id = 'withComputer';
+        this.label = document.createElement('label');
+        this.label.setAttribute('for','withComputer');
+        this.label.innerText = 'I am playing with computer';
+        this.form.appendChild(this.playingWithComputer);
+        this.form.appendChild(this.label);
         this.gameContainer.appendChild(this.inputWinLength);
+        this.gameContainer.appendChild(this.form);
         this.gameContainer.appendChild(this.sendButton);
 
         this.sendButton.addEventListener('click', this.SendData)
@@ -42,10 +55,12 @@ export class TicTacToe implements Game {
         let size = parseInt(inputDataSize.value);
         let inputDataWinLength = <HTMLInputElement>document.getElementById('WinLength');
         let winLength = parseInt(inputDataWinLength.value);
-        new Board(size,winLength, true);
+        let inputWithComp = <HTMLInputElement>document.getElementById('withComputer');
+        let withComp = inputWithComp.checked;
+        new Board(size,winLength, withComp);
     }
     getGameElement(): HTMLElement {
-        console.log('aaaaaa');
+        
         return this.gameContainer;
     }
 }

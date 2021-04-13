@@ -27,7 +27,7 @@ class App {
         intro.appendChild(secondHeader);
         document.body.appendChild(intro);
         window.addEventListener('load', ()=>{
-            intro.classList.add('introOnLoad');
+            intro.classList.add('containerVisible');
         })
         
         

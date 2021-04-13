@@ -1,31 +1,55 @@
 @import './gloomySunday.scss';
+@import './sweets.scss';
+
 body {
   color: $font-color;
   background-color: $bg-color;
 }
+
 @mixin forContainers {
   display: $flexBox;
-  justify-content: $containersPosition;
   flex-direction: $columnDir;
+  align-items: $containersPosition;
   text-align: $containersPosition;
   font-family: Arial, Helvetica, sans-serif;
   padding:1.5 * $standardFontSize;
 }
+@mixin forTransitions {
+  transition: 1s ease;
+  transform: scale(0,0);
+}
 .intro{
     @include forContainers();
+    @include forTransitions();
     background-color: $intro-color;
-    font-size: 2* $standardFontSize;
-    transition: 1s ease;
-    transform: scale(0,0);
-}
+    font-size: 2* $standardFontSize;  
     
-.introOnLoad{
+}
+
+.notDisplayed{
+  @include forContainers();
+  @include forTransitions();
+  background-color: $popUpColor;
+  font-size: 3* $standardFontSize;
+  max-height: $standardSize;
+}    
+.containerVisible{
     transform: scale(1,1);
 } 
-
+#confirmResult{
+  width: $standardSize;
+  background-color: $intro-color;
+  border-radius: $standardSize*0.3;
+  font-size: $standardFontSize * 1.5;
+  
+}
+#confirmResult:hover{
+  background-color: $buttonHoverColor;
+  cursor: pointer;
+}
 .Field{
-  width: 50px;
-  height: 50px;
+  width: $standardSize;
+  height: $standardSize;
   
 }
 .Board{
@@ -51,6 +75,7 @@ body {
 .item:hover{
   background-color: $hoverColor;
   transition: 0.5s ease-in-out;
+  cursor:pointer;
 }
 .pink{
   background-color: $fieldOne;

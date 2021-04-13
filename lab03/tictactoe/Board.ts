@@ -12,6 +12,9 @@ class Board{
     winLength: number;
     gameContainer: HTMLDivElement;
     withComputer:boolean;
+    popUpContainer: HTMLDivElement;
+    popUpContent: HTMLElement;
+    popUpCloseBtn: HTMLDivElement;
     
     constructor(size:number, winLength:number, withComputer: boolean){
         this.size = size;
@@ -21,6 +24,20 @@ class Board{
         this.gameContainer = <HTMLDivElement>(document.getElementById('TicTacToeContainer'));
         this.gameContainer.appendChild(this.board);
         this.withComputer = withComputer;
+        this.popUpContainer = document.createElement('div');
+        this.popUpContainer.classList.add('notDisplayed');
+        this.popUpContent = document.createElement('div');
+        this.popUpContent.id = 'popUpContent';
+        this.popUpContainer.appendChild(this.popUpContent);
+        this.popUpCloseBtn = document.createElement('div');
+        this.popUpCloseBtn.innerText = "OK";
+        this.popUpCloseBtn.id = 'confirmResult';
+        this.popUpContainer.appendChild(this.popUpCloseBtn);
+        this.gameContainer.appendChild(this.popUpContainer);
+        this.popUpCloseBtn.addEventListener('click', ()=>{
+            this.popUpContainer.classList.remove('containerVisible');
+            
+        })
         this.Init();
         
         
@@ -60,11 +77,12 @@ class Board{
                 this.fields.forEach(field =>{
                     field.element.removeEventListener('click', this.MakeMoveWithComputer);
                 })
-                console.log('Wygrałeś !');
+                this.ShowResult('Wygrałeś !');
                 return;
             }
             if(this.CheckFull() && !this.CheckWin(clickedField)){
-                console.log('Remis !');
+                this.ShowResult('Remis !');
+                return;
             }
             let chosenField = this.ComputerMove();
             console.log(chosenField);
@@ -72,10 +90,10 @@ class Board{
                         this.fields.forEach(field =>{
                         field.element.removeEventListener('click', this.MakeMoveWithComputer);
                     })
-                    console.log('Wygrał komputer !');
+                    this.ShowResult('Wygrał komputer !');
             }
             if(this.CheckFull() && !this.CheckWin(chosenField)){
-                console.log('Remis !');
+                this.ShowResult('Remis !');
             }
         }
             
@@ -95,10 +113,10 @@ class Board{
                 this.fields.forEach(field =>{
                     field.element.removeEventListener('click', this.MakeMove);
                 })
-                alert(`${clickedField.element.innerHTML == "X" ? 'Cross' : 'Circle'} won !`);
+                this.ShowResult(`${clickedField.State() == MoveType.cross ? 'Cross' : 'Circle'} won !`);
             }
             if(this.CheckFull() && !this.CheckWin(clickedField)){
-                alert('Remis !');
+                this.ShowResult('Remis !');
             }
            
             if(this.move == MoveType.circle){
@@ -114,7 +132,7 @@ class Board{
     }
     
     ComputerMove(): Field{
-        //this.move = MoveType.circle;
+        
         let emptyFields = this.fields.filter(el => el.State() == MoveType.empty);
         console.log(emptyFields);
         let moved = false;
@@ -128,8 +146,6 @@ class Board{
             }
             emptyFields[x].MakeMove(MoveType.cross);
             if(!moved && this.CheckWin(emptyFields[x])){
-                    console.log(emptyFields[x].State());
-                    console.log(this.CheckWin(emptyFields[x]));
                     emptyFields[x].MakeMove(MoveType.circle);
                     moved = true;
                     console.log(emptyFields[x]);
@@ -233,7 +249,7 @@ class Board{
                 }
             }
         }
-        if(vertical == this.winLength || horizontal == this.winLength || diagonalX == this.winLength || diagonalY == this.winLength){
+        if(vertical >= this.winLength || horizontal >= this.winLength || diagonalX >= this.winLength || diagonalY >= this.winLength){
             isWon = true;
             console.log(horizontal);
             console.log(vertical);
@@ -243,6 +259,13 @@ class Board{
         
         return isWon;
 
+    }
+    ShowResult(text:string){
+        
+        let info = <HTMLElement>document.getElementById('popUpContent');
+        info.innerText = text;
+        this.popUpContainer.classList.add('containerVisible');
+        
     }
     
 }
