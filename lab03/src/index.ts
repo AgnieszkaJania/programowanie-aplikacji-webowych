@@ -1,6 +1,7 @@
 import { Games } from "./game.enum";
 import { Game } from "./game.model";
 import  GamesFactory  from "./GamesFactory";
+import  SwitcherButton  from "./switcher";
 import './styles/styles.scss';
 
 class App {
@@ -12,8 +13,9 @@ class App {
     }
 
     initMenu(): void {
+        document.body.setAttribute('data-theme','sweets');
         const menuContainer = <HTMLDivElement>(document.createElement('div'));
-        menuContainer.classList.add('menuContainer'); // kontener menu dostępnych gier // lista pozycji w menu dostępnych gier
+        menuContainer.id = 'menuContainer'; // kontener menu dostępnych gier // lista pozycji w menu dostępnych gier
         const gameContainer = <HTMLDivElement>(document.createElement('div')); // kontener główny ekranu z grą
         gameContainer.classList.add('gameContainer');
         const intro = <HTMLDivElement>(document.createElement('div'));
@@ -55,6 +57,7 @@ class App {
         
         document.body.appendChild(menuContainer);
         document.body.appendChild(gameContainer);
+        let switcherButton = new SwitcherButton();
     }
 }
 let gamesFactory = new GamesFactory();

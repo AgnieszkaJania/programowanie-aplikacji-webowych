@@ -1,14 +1,17 @@
-$font-color:rgb(94, 90, 90);
-$bg-color: beige;
-$intro-color: rgb(185, 109, 230);
-$standardFontSize: 10px;
-$containersPosition: center;
-$flexBox: flex;
-$columnDir:column;
-$hoverColor:rgb(236, 132, 214);
-$signColor: rgb(255, 0, 149);
-$fieldOne: pink;
-$fieldTwo: aqua;
-$popUpColor: rgb(226, 88, 173);
-$standardSize: 50px;
-$buttonHoverColor:rgb(242, 245, 247);
+[data-theme="sweets"]{
+    --introFontSize:20px;
+    --font-color:rgb(94, 90, 90);
+    --bg-color: beige;
+    --intro-color: rgb(185, 109, 230);
+    --standardFontSize: 10px;
+    --containersPosition: center;
+    --flexBox: flex;
+    --columnDir:column;
+    --hoverColor:rgb(236, 132, 214);
+    --signColor: rgb(255, 0, 149);
+    --fieldOne: pink;
+    --fieldTwo: aqua;
+    --popUpColor: rgb(226, 88, 173);
+    --standardSize: 50px;
+    --buttonHoverColor:rgb(242, 245, 247);
+}

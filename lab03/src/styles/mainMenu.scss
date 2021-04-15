@@ -1,0 +1,35 @@
+@import './mixins.scss';
+@import './gloomySunday.scss';
+@import './sweets.scss';
+
+body {
+    color: var(--font-color);
+    background-color: var(--bg-color);
+}
+  
+.intro{
+    @include forContainers();
+    @include forTransitions();
+    background-color: var(--intro-color);
+    font-size: var(--introFontSize);  
+}
+         
+  
+.containerVisible{
+      transform: scale(1,1);
+} 
+
+#menuContainer{
+    @include forContainers();
+    
+}
+  
+.item{
+    padding:10px;
+}
+  
+.item:hover{
+    background-color: var(--hoverColor);
+    transition: 0.5s ease-in-out;
+    cursor:pointer;
+}

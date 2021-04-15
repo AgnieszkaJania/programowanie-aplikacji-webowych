@@ -1,0 +1,12 @@
+@mixin forContainers {
+    display: var(--flexBox);
+    flex-direction: var(--columnDir);
+    align-items: var(--containersPosition);
+    text-align: var(--containersPosition);
+    font-family: Arial, Helvetica, sans-serif;
+    padding:15px;
+  }
+  @mixin forTransitions {
+    transition: 1s ease;
+    transform: scale(0,0);
+  }

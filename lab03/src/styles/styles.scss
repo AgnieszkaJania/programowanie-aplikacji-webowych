@@ -1,62 +1,37 @@
+@import './mixins.scss';
+@import './mainMenu.scss';
 @import './gloomySunday.scss';
 @import './sweets.scss';
-
-body {
-  color: $font-color;
-  background-color: $bg-color;
-}
-
-@mixin forContainers {
-  display: $flexBox;
-  flex-direction: $columnDir;
-  align-items: $containersPosition;
-  text-align: $containersPosition;
-  font-family: Arial, Helvetica, sans-serif;
-  padding:1.5 * $standardFontSize;
-}
-@mixin forTransitions {
-  transition: 1s ease;
-  transform: scale(0,0);
-}
-.intro{
-    @include forContainers();
-    @include forTransitions();
-    background-color: $intro-color;
-    font-size: 2* $standardFontSize;  
-    
-}
 
 .notDisplayed{
   @include forContainers();
   @include forTransitions();
-  background-color: $popUpColor;
-  font-size: 3* $standardFontSize;
-  max-height: $standardSize;
+  background-color: var(--popUpColor);
+  font-size: var(--bigFont);
+  max-height: var(--standardSize);
 }    
-.containerVisible{
-    transform: scale(1,1);
-} 
+
 #confirmResult{
-  width: $standardSize;
-  background-color: $intro-color;
-  border-radius: $standardSize*0.3;
-  font-size: $standardFontSize * 1.5;
+  width: var(--standardSize);
+  background-color: var(--intro-color);
+  border-radius: var(--bigSize);
+  font-size: 15px;
   
 }
 #confirmResult:hover{
-  background-color: $buttonHoverColor;
+  background-color: var(--buttonHoverColor);
   cursor: pointer;
 }
 .Field{
-  width: $standardSize;
-  height: $standardSize;
+  width: var(--standardSize);
+  height: var(--standardSize);
   
 }
 .Board{
   display:flex;
   flex-direction: column;
   margin: 0 auto;
-  color:$signColor;
+  color:var(--signColor);
   font-size: 5ch;
   text-align: center;
 }
@@ -64,22 +39,10 @@ body {
   display:flex;
   justify-content: center;
 }
-.menuContainer{
-  @include forContainers();
-  
-}
 
-.item{
-  padding:10px;
-}
-.item:hover{
-  background-color: $hoverColor;
-  transition: 0.5s ease-in-out;
-  cursor:pointer;
-}
 .pink{
-  background-color: $fieldOne;
+  background-color: var(--fieldOne);
 }
 .aqua{
-  background-color: $fieldTwo;
+  background-color: var(--fieldTwo);
 }
