@@ -1,0 +1,54 @@
+@import '../src/styles/mixins.scss';
+@import '../src/styles/gloomySunday.scss';
+@import '../src/styles/sweets.scss';
+@import '../src/styles/mainMenu.scss';
+@import '../src/styles/standardSizes.scss';
+
+
+.notDisplayed{
+    @include forContainers();
+    @include forTransitions();
+    background-color: var(--popUpColor);
+    font-size: var(--bigFont);
+    max-height: var(--standardSize);
+  }    
+  
+  #confirmResult{
+    width: var(--standardSize);
+    background-color: var(--intro-color);
+    border-radius: var(--bigSize);
+    font-size: var(--biggerFontSize);
+    
+  }
+  #confirmResult:hover{
+    background-color: var(--buttonHoverColor);
+    cursor: var(--standardCursor);
+  }
+  .Field{
+    width: var(--standardSize);
+    height: var(--standardSize);
+    
+  }
+  .Board{
+    display:var(--flexBox);
+    flex-direction: var(--columnDir);
+    margin: var(--zero) auto;
+    color:var(--signColor);
+    font-size: var(--boardFontSize);
+    text-align: var(--containersPosition);
+  }
+  .Line{
+    display:var(--flexBox);
+    justify-content: var(--containersPosition);
+  }
+  
+  .pink{
+    background-color: var(--fieldOne);
+  }
+  .aqua{
+    background-color: var(--fieldTwo);
+  }
+
+  .containerVisible{
+    transform: scale(1,1);
+} 

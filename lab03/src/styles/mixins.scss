@@ -4,9 +4,9 @@
     align-items: var(--containersPosition);
     text-align: var(--containersPosition);
     font-family: Arial, Helvetica, sans-serif;
-    padding:15px;
+    padding:var(--bigPadding);
   }
   @mixin forTransitions {
-    transition: 1s ease;
+    transition: var(--introTransition) ease;
     transform: scale(0,0);
   }
