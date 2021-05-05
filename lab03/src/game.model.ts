@@ -1,4 +1,5 @@
 export interface Game {
-    name: string;
-    getGameElement(): HTMLElement;
+  name: string;
+  getGameElement(): HTMLElement;
+  disable: boolean;
 }

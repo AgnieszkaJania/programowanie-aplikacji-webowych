@@ -1,7 +1,11 @@
+import disabled from "../src/disabled";
+import turnedOff from "../src/turnOFF";
 import {Game}  from "../src/game.model";
 import Board from './Board';
+import LogGame from "../src/logGame";
+//import disableOneField from '../src/disableOneField';
 
-
+//@disabled
 export class TicTacToe implements Game {
     name: string;
     inputSize: HTMLElement;
@@ -13,6 +17,7 @@ export class TicTacToe implements Game {
     playingWithComputer: HTMLElement;
     label: HTMLElement;
     form: HTMLElement;
+    disable: boolean;
 
     constructor() {
         this.name = "Kółko i krzyżyk";
@@ -50,6 +55,7 @@ export class TicTacToe implements Game {
         this.sendButton.addEventListener('click', this.SendData)
         
     }
+   
     SendData(){
         let inputDataSize  = <HTMLInputElement>document.getElementById("BoardSize");
         let size = parseInt(inputDataSize.value);
@@ -59,8 +65,10 @@ export class TicTacToe implements Game {
         let withComp = inputWithComp.checked;
         new Board(size,winLength, withComp);
     }
+
+    @turnedOff
+    @LogGame
     getGameElement(): HTMLElement {
-        
-        return this.gameContainer;
+           return this.gameContainer;
     }
 }

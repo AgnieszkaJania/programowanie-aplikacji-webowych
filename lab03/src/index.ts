@@ -3,6 +3,8 @@ import { Game } from "./game.model";
 import  GamesFactory  from "./GamesFactory";
 import  SwitcherButton  from "./switcher";
 import './styles/styles.scss';
+import { TicTacToe } from "../tictactoe/tictactoe";
+import { BattleShips } from "../Battleships/battleships";
 
 class App {
 
@@ -44,13 +46,14 @@ class App {
             }
             console.log(Number(gameKind));
             const game = this.gamesFactory.getGame(Number(gameKind));
+            if(game === undefined)
+                continue;
             const item = document.createElement('div');
             item.classList.add('item');
             item.appendChild(document.createTextNode(game.name));
             item.addEventListener('click', ()=>{
                 gameContainer.innerHTML="";
                 gameContainer.appendChild(game.getGameElement());
-
             })
             menuContainer.appendChild(item);
         }

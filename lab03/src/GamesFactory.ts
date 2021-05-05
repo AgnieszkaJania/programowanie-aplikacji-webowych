@@ -4,19 +4,24 @@ import {TicTacToe} from "../tictactoe/tictactoe";
 import {BattleShips} from "../Battleships/battleships"; 
 
 class GamesFactory{
-    getGame(game: Games): Game{
+    getGame(game: Games): Game | undefined{
+        let gameR: Game;
         switch(game){
             case Games.TicTacToe:
                 console.log('TicTacToe')
-                return new TicTacToe();
+                gameR = new TicTacToe();
+                break;
             case Games.BattleShips:
                 console.log('Battle');
-                return new BattleShips();
+                gameR = new BattleShips();
+                break;
             default:
                 throw new Error('Invalid game');
-
-            
         }
+        if(gameR.disable === true){
+            return undefined;
+        }
+        return gameR;
     }
 }
 
