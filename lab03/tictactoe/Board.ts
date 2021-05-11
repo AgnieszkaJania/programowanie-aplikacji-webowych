@@ -1,7 +1,9 @@
+import { Game } from './../src/game.model';
 import Line from './Line';
 import Field from './Field';
 import  MoveType  from './MoveType';
-
+import {SessionStorageGame } from '../src/sessionStorage';
+import GameSaver from '../src/localStorage';
 
 class Board{
 
@@ -15,17 +17,21 @@ class Board{
     popUpContainer: HTMLDivElement;
     popUpContent: HTMLElement;
     popUpCloseBtn: HTMLDivElement;
+    SSG = new SessionStorageGame();
+    GS = new GameSaver();
     
     constructor(size:number, winLength:number, withComputer: boolean){
         this.size = size;
         this.board = document.createElement('div');
-        this.board.classList.add('Board');
+        //this.board.classList.add('Board');
+        this.board.id = 'Board';
         this.winLength = winLength;
         this.gameContainer = <HTMLDivElement>(document.getElementById('TicTacToeContainer'));
         this.gameContainer.appendChild(this.board);
         this.withComputer = withComputer;
         this.popUpContainer = document.createElement('div');
         this.popUpContainer.classList.add('notDisplayed');
+        this.popUpContainer.id='popUpContainer';
         this.popUpContent = document.createElement('div');
         this.popUpContent.id = 'popUpContent';
         this.popUpContainer.appendChild(this.popUpContent);
@@ -38,7 +44,22 @@ class Board{
             this.popUpContainer.classList.remove('containerVisible');
             
         })
+
+        let btnUndo = document.createElement('button');
+        btnUndo.innerText = 'Undo';
+        this.gameContainer.appendChild(btnUndo);
+        btnUndo.addEventListener('click', ()=>{
+            if(this.SSG.UndoMove(this.fields)){
+                if(this.move == MoveType.circle){
+                    this.move = MoveType.cross;
+                }else{
+                    this.move = MoveType.circle;
+                }
+            }
+        });
+        
         this.Init();
+        sessionStorage.clear();
         
         
     }
@@ -63,6 +84,14 @@ class Board{
                
             }
         }
+        
+        let saveBtn = document.createElement('button');
+        saveBtn.id='saveBtn';
+        saveBtn.innerText = 'Save game';
+        this.gameContainer.appendChild(saveBtn);
+        saveBtn.addEventListener('click', ()=>{
+            this.GS.SaveGame(this);
+        })
     }
     public MakeMoveWithComputer=(e:MouseEvent)=>{
         const target = <HTMLElement>e.target;
@@ -85,7 +114,7 @@ class Board{
                 return;
             }
             let chosenField = this.ComputerMove();
-            console.log(chosenField);
+            
             if(this.CheckWin(chosenField)){
                         this.fields.forEach(field =>{
                         field.element.removeEventListener('click', this.MakeMoveWithComputer);
@@ -106,6 +135,7 @@ class Board{
         const id = target.id;
 
         const clickedField =  this.fields.find((el)=>el.Equal(id));
+        this.SSG.AddMove(clickedField);
 
         if(clickedField && clickedField.State() == MoveType.empty){
             clickedField.MakeMove(this.move);
@@ -128,6 +158,7 @@ class Board{
             }
              
         }
+        
         
     }
     

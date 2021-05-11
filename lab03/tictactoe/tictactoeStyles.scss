@@ -29,7 +29,7 @@
     height: var(--standardSize);
     
   }
-  .Board{
+  #Board{
     display:var(--flexBox);
     flex-direction: var(--columnDir);
     margin: var(--zero) auto;

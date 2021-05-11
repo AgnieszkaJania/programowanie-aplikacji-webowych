@@ -1,9 +1,10 @@
 import  MoveType  from "./MoveType";
 
-class Field{
+export class Field{
     element: HTMLElement;
     row: number;
     column: number;
+    move: MoveType = MoveType.empty;
 
     constructor(row:number, column:number){
         this.row = row;
@@ -36,6 +37,7 @@ class Field{
     }
 
     MakeMove(type: MoveType){
+        this.move = type;
         switch(type){
             case MoveType.circle:
                 this.element.innerText = "";

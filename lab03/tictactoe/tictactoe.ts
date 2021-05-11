@@ -3,66 +3,93 @@ import turnedOff from "../src/turnOFF";
 import {Game}  from "../src/game.model";
 import Board from './Board';
 import LogGame from "../src/logGame";
-//import disableOneField from '../src/disableOneField';
+import disableOneField from '../src/disableOneField';
+import GameSaver from '../src/localStorage';
 
 //@disabled
 export class TicTacToe implements Game {
-    name: string;
-    inputSize: HTMLElement;
-    sendButton: HTMLElement;
-    infoSize: HTMLElement;
-    infoWinLength: HTMLElement;
-    inputWinLength:HTMLElement;
-    gameContainer: HTMLDivElement;
-    playingWithComputer: HTMLElement;
-    label: HTMLElement;
-    form: HTMLElement;
+    name: string = "Kółko i krzyżyk";
+    // inputSize: HTMLInputElement;
+    //sendButton: HTMLElement;
+    //infoSize: HTMLElement;
+    //infoWinLength: HTMLElement;
+    // inputWinLength:HTMLInputElement;
+    gameContainer: HTMLDivElement = document.createElement('div');
+    //playingWithComputer: HTMLElement;
+    //label: HTMLElement;
+    //form: HTMLElement;
     disable: boolean;
 
-    constructor() {
-        this.name = "Kółko i krzyżyk";
-        this.gameContainer = document.createElement('div');
-        this.gameContainer.id = 'TicTacToeContainer';
-        this.infoSize = document.createElement('p');
-        this.infoSize.innerHTML = 'Enter a size of your board: ';
-        this.gameContainer.appendChild(this.infoSize);
-        this.inputSize = document.createElement('input');
-        this.inputSize.setAttribute('type','text');
-        this.inputSize.id = 'BoardSize';
-        this.gameContainer.appendChild(this.inputSize);
-        this.sendButton = document.createElement('button');
-        this.sendButton.style.display = "block";
-        this.sendButton.innerText = 'Send';
-        this.infoWinLength = document.createElement('p');
-        this.infoWinLength.innerHTML = 'Enter the length of winning sequence: ';
-        this.gameContainer.appendChild(this.infoWinLength);
-        this.inputWinLength = document.createElement('input');
-        this.inputWinLength.setAttribute('type','text');
-        this.inputWinLength.id = 'WinLength';
-        this.form = document.createElement('form');
-        this.playingWithComputer = document.createElement('input');
-        this.playingWithComputer.setAttribute('type', 'radio');
-        this.playingWithComputer.id = 'withComputer';
-        this.label = document.createElement('label');
-        this.label.setAttribute('for','withComputer');
-        this.label.innerText = 'I am playing with computer';
-        this.form.appendChild(this.playingWithComputer);
-        this.form.appendChild(this.label);
-        this.gameContainer.appendChild(this.inputWinLength);
-        this.gameContainer.appendChild(this.form);
-        this.gameContainer.appendChild(this.sendButton);
+    createP(text: string):HTMLParagraphElement{
+        const p = document.createElement('p');
+        p.innerHTML = text;
 
-        this.sendButton.addEventListener('click', this.SendData)
-        
+        return p;
     }
-   
-    SendData(){
-        let inputDataSize  = <HTMLInputElement>document.getElementById("BoardSize");
-        let size = parseInt(inputDataSize.value);
-        let inputDataWinLength = <HTMLInputElement>document.getElementById('WinLength');
-        let winLength = parseInt(inputDataWinLength.value);
-        let inputWithComp = <HTMLInputElement>document.getElementById('withComputer');
-        let withComp = inputWithComp.checked;
+
+    constructor() {
+        const infoSize = this.createP("Enter a size of your board:");
+        this.gameContainer.appendChild(infoSize);
+        this.gameContainer.id = 'TicTacToeContainer';
+        
+        const inputSize = document.createElement('input');
+        inputSize.setAttribute('type','text');
+        inputSize.id = 'BoardSize';
+        this.gameContainer.appendChild(inputSize);
+
+        const sendButton = document.createElement('button');
+        sendButton.style.display = "block";
+        sendButton.innerText = 'Send';
+
+        const infoWinLength = this.createP("Enter the length of winning sequence: ");
+        this.gameContainer.appendChild(infoWinLength);
+
+        const inputWinLength = document.createElement('input');
+        inputWinLength.setAttribute('type','text');
+        inputWinLength.id = 'WinLength';
+
+        const form = document.createElement('form');
+        const playingWithComputer = document.createElement('input');
+        playingWithComputer.setAttribute('type', 'radio');
+        playingWithComputer.id = 'withComputer';
+
+        const label = document.createElement('label');
+        label.setAttribute('for','withComputer');
+        label.innerText = 'I am playing with computer';
+        form.appendChild(playingWithComputer);
+        form.appendChild(label);
+
+        this.gameContainer.appendChild(inputWinLength);
+        this.gameContainer.appendChild(form);
+        this.gameContainer.appendChild(sendButton);
+
+        let restoreBtn = document.createElement('button');
+        restoreBtn.innerText='Restore Game';
+        restoreBtn.id='restoreBtn';
+        this.gameContainer.appendChild(restoreBtn);
+        restoreBtn.addEventListener('click', ()=>{
+            let sg = new GameSaver();
+            sg.RestoreGame();
+        })
+
+        sendButton.addEventListener('click',()=>{ 
+         
+            this.SendData(
+                parseInt(inputSize.value),
+                parseInt(inputWinLength.value),
+                playingWithComputer.checked);
+        })
+    }
+
+    @disableOneField
+    SendData(size:number, winLength:number, withComp:boolean){
+        // let inputDataSize  = <HTMLInputElement>document.getElementById("BoardSize");
+        // let size = parseInt(inputDataSize.value);
+        // let inputDataWinLength = <HTMLInputElement>document.getElementById('WinLength');
+        // let winLength = parseInt(inputDataWinLength.value);
+        // let inputWithComp = <HTMLInputElement>document.getElementById('withComputer');
+        // let withComp = inputWithComp.checked;
+
         new Board(size,winLength, withComp);
     }
 
