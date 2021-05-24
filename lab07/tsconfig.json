@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "target": "esnext",
+        "module": "esnext",
+      "outDir": "./dist/server",
+      "esModuleInterop": true,  
+      "skipLibCheck": true,
+      "forceConsistentCasingInFileNames": true 
+    }
+  }

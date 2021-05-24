@@ -1,0 +1,60 @@
+###
+GET http://localhost:8080/products HTTP/1.1
+
+###
+
+POST http://localhost:8080/products HTTP/1.1
+content-type: application/json
+
+{   
+    "id": 2,
+    "name": "Telewizor",
+    "description": "Telewizor plazmowy",
+    "price": 5000
+}
+
+###
+PUT http://localhost:8080/products
+content-type: application/json
+
+{
+    "id": 2,
+    "name": "Telewizor",
+    "description": "Telewizor zmieniony",
+    "price": 2137
+}
+
+###
+DELETE http://localhost:8080/products/2 HTTP/1.1
+
+/// Clothes
+
+###
+GET http://localhost:8080/clothes HTTP/1.1
+
+###
+
+POST http://localhost:8080/clothes HTTP/1.1
+content-type: application/json
+
+{   
+    "id": 1,
+    "type": "Shirt",
+    "features": "oversize, floral",
+    "material": "Cotton",
+    "price": 50
+}
+###
+PUT http://localhost:8080/clothes
+content-type: application/json
+
+{
+    "id": 1,
+    "type": "Bag",
+    "features": "black, onesize",
+    "material": "Leather eco",
+    "price": 40
+}
+
+###
+DELETE http://localhost:8080/clothes/1 HTTP/1.1
