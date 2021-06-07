@@ -1,0 +1,58 @@
+###
+GET http://localhost:8080/products HTTP/1.1
+
+###
+GET http://localhost:8080/categories HTTP/1.1
+
+###
+
+POST http://localhost:8080/products HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Telefon",
+    "description": "IPhone 10",
+    "price": 10000,
+    "category":"60be7edb8bcecb4720dc5cbe"
+    
+}
+###
+POST http://localhost:8080/categories HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Sprzet RTV"
+}
+
+
+###
+PUT http://localhost:8080/products HTTP/1.1
+content-type: application/json
+
+{
+    "id": "60be80969d550b0534f9ad47",
+    "name": "Telewizor zmieniony",
+    "description": "Telewizor plazmowy",
+    "price": 15000
+}
+
+###
+DELETE http://localhost:8080/products HTTP/1.1
+content-type: application/json
+
+{
+    "id": "60be8da59d550b0534f9ad49"
+}
+
+
+
+###
+GET http://localhost:8080/categories HTTP/1.1
+
+###
+POST http://localhost:8080/categories HTTP/1.1
+content-type: application/json
+
+{
+    "name": "Sprzęt RTV"
+}
