@@ -51,7 +51,11 @@ interface Person {
     console.log('Zadanie 4');
     const filtered = filterPersons(persons, {name: 'Adam'});
     filtered.forEach(logPerson);
-
+    for(let i:number = 0; i<10;i++){
+        console.log(i);
+    }
+    let arr: string[] = ['aga', 'kasia', 'tomek'];
+    console.log(arr);
     
     // TODO:
     // 1. Przy pomocy funkcji logPerson wypisać osoby z tablicy users i admins (patrz foreach)
