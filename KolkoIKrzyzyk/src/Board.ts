@@ -128,12 +128,32 @@ class Board{
             });
         }
         if(this.CheckFull() && !isWon){
-            alert('Remis !');
+            let message = 'Remis !';
+            let box = document.createElement('div');
+            box.id = 'win';
+            box.innerHTML = message;
+            document.getElementById('TicTacToeContainer').appendChild(box);
+            let fields = document.getElementsByClassName('Field');
+            for(let j = 0; j < fields.length; j++){
+                
+                fields[j].removeEventListener('click', this.MakeMove);
+            }
         }
        
         if(isWon){
             
-            alert(`${FieldType == 1 ? 'Cross' : 'Circle'} won !`);
+            //alert(`${FieldType == 1 ? 'Cross' : 'Circle'} won !`);
+            let message = `${FieldType == 1 ? 'Cross' : 'Circle'} won !`;
+            let box = document.createElement('div');
+            box.id = 'win';
+            box.innerHTML = message;
+            document.getElementById('TicTacToeContainer').appendChild(box);
+            let fields = document.getElementsByClassName('Field');
+            for(let j = 0; j < fields.length; j++){
+                
+                fields[j].removeEventListener('click', this.MakeMove);
+            }
+          
         }
 
     }
