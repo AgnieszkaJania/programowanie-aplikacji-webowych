@@ -41,11 +41,6 @@ arrayByAge.forEach(logPerson);
 console.log('Zadanie 4');
 var filtered = filterPersons(persons, { name: 'Adam' });
 filtered.forEach(logPerson);
-for (var i = 0; i < 10; i++) {
-    console.log(i);
-}
-var arr = ['aga', 'kasia', 'tomek'];
-console.log(arr);
 // TODO:
 // 1. Przy pomocy funkcji logPerson wypisać osoby z tablicy users i admins (patrz foreach)
 // 2. Złączyć tablice users i admins i wypisać zawartość złączonej tablicy na konsoli (patrz operator spread)
