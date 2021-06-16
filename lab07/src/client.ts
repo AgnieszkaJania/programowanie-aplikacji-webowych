@@ -1,6 +1,6 @@
 let socket = new WebSocket("ws://localhost:8080");
 socket.onopen = function(e) {
-  socket.send("Hello!");
+  //socket.send("bla bla!");
 };
 socket.onmessage = function(event) {
   const msg = document.getElementById('messages')

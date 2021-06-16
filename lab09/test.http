@@ -11,8 +11,8 @@ content-type: application/json
 
 {
     "name": "Telefon",
-    "description": "IPhone 10",
-    "price": 10000,
+    "description": "Samsung Galaxy Fold 2",
+    "price": 14000,
     "category":"60be7edb8bcecb4720dc5cbe"
     
 }
@@ -41,7 +41,7 @@ DELETE http://localhost:8080/products HTTP/1.1
 content-type: application/json
 
 {
-    "id": "60be8da59d550b0534f9ad49"
+    "id": "60c8fe5f7f54484fc40b4be7"
 }
 
 
